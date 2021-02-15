@@ -1,2 +1,0 @@
-2021-02-15 16:41:28.9712 INFO Accessed Home Controller
-2021-02-15 16:42:45.3776 DEBUG Get a value

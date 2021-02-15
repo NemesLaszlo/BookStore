@@ -1,5 +1,6 @@
 using BookStore_API.Contracts;
 using BookStore_API.Data;
+using BookStore_API.Mappings;
 using BookStore_API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,6 +38,8 @@ namespace BookStore_API
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddAutoMapper(typeof(Maps));
 
             services.AddCors(o => {
                 o.AddPolicy("CorsPolicy",

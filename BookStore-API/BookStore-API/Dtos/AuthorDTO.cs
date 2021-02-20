@@ -12,7 +12,15 @@ namespace BookStore_API.Dtos
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public string Bio { get; set; }
-        public virtual IList<BookDTO> Books { get; set; }
+        public virtual IList<BookInfoDTO> Books { get; set; }
+    }
+
+    public class AuthorInfoDTO
+    {
+        public int Id { get; set; }
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
+        public string Bio { get; set; }
     }
 
     public class AuthorCreateDTO

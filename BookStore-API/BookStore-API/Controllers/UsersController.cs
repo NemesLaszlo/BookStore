@@ -71,6 +71,17 @@ namespace BookStore_API.Controllers
                 {
                     return InternalError($"{location}: {emailAdress} User Registration Attempt Failed. (Not valid email!)");
                 }
+                var emailAlreadyUsed = await _userManager.FindByEmailAsync(emailAdress);          
+                if (emailAlreadyUsed != null)
+                {
+                    return InternalError($"{location}: {emailAdress} User Registration Attempt Failed. (Email Already Used!)");
+                }
+                var userNameAlreadyUsed = await _userManager.FindByNameAsync(userName);
+                if (userNameAlreadyUsed != null)
+                {
+                    return InternalError($"{location}: {userName} User Registration Attempt Failed. (UserName Already Used!)");
+                }
+
                 var user = new IdentityUser { UserName = userName, Email = emailAdress };
                 var result = await _userManager.CreateAsync(user, password);
 
@@ -80,7 +91,7 @@ namespace BookStore_API.Controllers
                     {
                         _logger.LogError($"{location}: {error.Code} {error.Description}");
                     }
-                    return InternalError($"{location}: {emailAdress} User Registration Attempt Failed");
+                    return InternalError($"{location}: {userName} - {emailAdress} User Registration Attempt Failed");
                 }
                 await _userManager.AddToRoleAsync(user, "Customer");
                 return Created("login", new { result.Succeeded });

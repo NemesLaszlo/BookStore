@@ -1,4 +1,5 @@
 ﻿@page "/authors/edit/{Id}"
+@attribute [Authorize(Roles = "Administrator")]
 
 @inject IAuthorRepository _repo
 @inject NavigationManager _navManager

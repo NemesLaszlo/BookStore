@@ -11,10 +11,13 @@
 }
 else
 {
-    <a href="/authors/create" class="btn btn-primary">
-        <span class="oi oi-plus"></span>
-        Create New Author
-    </a>
+    <AuthorizeView Roles="Administrator">
+        <a href="/authors/create" class="btn btn-primary">
+            <span class="oi oi-plus"></span>
+            Create New Author
+        </a>
+        <br />
+    </AuthorizeView>
 
     @if (Model.Count < 1)
     {
@@ -42,13 +45,16 @@ else
                                 <span class="oi oi-book"></span>
                             </a>
 
-                            <a href="/authors/edit/@author.Id" class="btn btn-warning">
-                                <span class="oi oi-pencil"></span>
-                            </a>
+                            <AuthorizeView Roles="Administrator">
+                                <a href="/authors/edit/@author.Id" class="btn btn-warning">
+                                    <span class="oi oi-pencil"></span>
+                                </a>
 
-                            <a href="/authors/delete/@author.Id" class="btn btn-danger">
-                                <span class="oi oi-delete"></span>
-                            </a>
+                                <a href="/authors/delete/@author.Id" class="btn btn-danger">
+                                    <span class="oi oi-delete"></span>
+                                </a>
+                            </AuthorizeView>
+
                         </td>
                     </tr>
                 }

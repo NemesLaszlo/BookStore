@@ -2,13 +2,12 @@
 
 @inject IAuthorRepository _repo
 
-<h3>Index</h3>
-
+<h3 class="card-title">Index</h3>
+<hr />
+<br />
 @if (Model == null)
 {
-    <div class="alert alert-dismissible alert-secondary">
-        Loading Data ...
-    </div>
+    <LoadingMessage Message="Loading Authors" />
 }
 else
 {
@@ -32,7 +31,7 @@ else
                             <span class="oi oi-book"></span>
                         </a>
 
-                        <a class="btn btn-warning">
+                        <a href="/authors/edit/@author.Id" class="btn btn-warning">
                             <span class="oi oi-pencil"></span>
                         </a>
 

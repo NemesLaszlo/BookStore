@@ -3,6 +3,7 @@
 
 @inject IAuthorRepository _repo
 @inject NavigationManager _navManager
+@inject IToastService _toastService
 
 <h3 class="card-title">Edit Author</h3>
 <hr />
@@ -66,6 +67,7 @@ else
         isSuccess = await _repo.Update(Endpoints.AuthorsEndpoint, Model, Model.Id);
         if (isSuccess)
         {
+            _toastService.ShowSuccess("Author Updated Successfully", "");
             BackToList();
         }
 

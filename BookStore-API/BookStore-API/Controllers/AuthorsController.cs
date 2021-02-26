@@ -223,7 +223,7 @@ namespace BookStore_API.Controllers
                 var isSuccessDeleteBooks = await _authorRepository.DeleteAllBooks(author.Books);
                 if (!isSuccessDeleteBooks)
                 {
-                    return InternalError($"{location}: Author's books delete failed");
+                    _logger.LogInfo($"{location}: Author with id: {id} has no books to delete");
                 }
                 var isSuccess = await _authorRepository.Delete(author);
                 if (!isSuccess)

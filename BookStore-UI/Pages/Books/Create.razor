@@ -5,6 +5,7 @@
 @inject IAuthorRepository _authorRepo
 @inject IFileUpload _fileUpload
 @inject NavigationManager _navManager
+@inject IToastService _toastService
 
 <h3>Create Book</h3>
 <hr />
@@ -105,6 +106,7 @@
             isSuccess = await _repo.Create(Endpoints.BooksEndpoint, Model);
             if (isSuccess)
             {
+                _toastService.ShowSuccess("Book Created Successfully", "");
                 BackToList();
             }
         }

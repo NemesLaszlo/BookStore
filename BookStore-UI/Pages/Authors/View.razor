@@ -16,7 +16,6 @@ else if (Model == null)
 }
 else
 {
-
     <div class="col-md-4">
         <table class="table table-responsive">
             <tr>
@@ -48,7 +47,7 @@ else
                 <ul class="list-group list-group-flush">
                     @foreach (var book in Model.Books)
                     {
-                        <li class="list-group-item"><a href="/books/view/@book.Id">@book.Title</a> - @string.Format(System.Globalization.CultureInfo.GetCultureInfo("en-us"), "{0:C}", book.Price) </li>          
+                        <li class="list-group-item"><a href="/books/view/@book.Id">@book.Title</a> - @string.Format(System.Globalization.CultureInfo.GetCultureInfo("en-us"), "{0:C}", book.Price) </li>
                     }
                 </ul>
             </div>
@@ -58,6 +57,14 @@ else
 }
 <br />
 
+<button @onclick="GoToEdit" class="btn btn-outline-warning">
+    <span class="oi oi-pencil"></span>
+    Edit Author
+</button>
+<button @onclick="GoToDelete" class="btn btn-outline-danger">
+    <span class="oi oi-circle-x"></span>
+    Delete Author
+</button>
 <button @onclick="BackToList" class="btn btn-outline-secondary">
     <span class="oi oi-media-skip-backward"></span>
     Back To Author List
@@ -78,6 +85,16 @@ else
     private void BackToList()
     {
         _navManager.NavigateTo("/authors/");
+    }
+
+    private void GoToEdit()
+    {
+        _navManager.NavigateTo($"/authors/edit/{Model.Id}");
+    }
+
+    private void GoToDelete()
+    {
+        _navManager.NavigateTo($"/authors/delete/{Model.Id}");
     }
 
 }

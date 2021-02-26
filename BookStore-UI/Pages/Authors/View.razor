@@ -48,7 +48,7 @@ else
                 <ul class="list-group list-group-flush">
                     @foreach (var book in Model.Books)
                     {
-                    <li class="list-group-item">@book.Title - @string.Format(System.Globalization.CultureInfo.GetCultureInfo("en-us"), "{0:C}", book.Price) </li>
+                        <li class="list-group-item"><a href="/books/view/@book.Id">@book.Title</a> - @string.Format(System.Globalization.CultureInfo.GetCultureInfo("en-us"), "{0:C}", book.Price) </li>          
                     }
                 </ul>
             </div>
@@ -60,7 +60,7 @@ else
 
 <button @onclick="BackToList" class="btn btn-outline-secondary">
     <span class="oi oi-media-skip-backward"></span>
-    Back To List
+    Back To Author List
 </button>
 
 @code {

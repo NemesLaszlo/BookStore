@@ -61,5 +61,11 @@ namespace BookStore_API.Services
         {
             return await _db.Authors.AnyAsync(q => q.Id == id);
         }
+
+        public async Task<bool> DeleteAllBooks(IEnumerable<Book> entities)
+        {
+            entities.ToList().ForEach(i => { _db.Books.Remove(i); });
+            return await Save();
+        }
     }
 }

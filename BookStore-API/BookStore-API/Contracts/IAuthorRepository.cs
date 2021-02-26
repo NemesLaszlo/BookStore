@@ -8,6 +8,6 @@ namespace BookStore_API.Contracts
 {
     public interface IAuthorRepository : IRepositoryBase<Author>
     {
-
+        Task<bool> DeleteAllBooks(IEnumerable<Book> entities);
     }
 }

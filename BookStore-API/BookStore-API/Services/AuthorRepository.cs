@@ -1,5 +1,6 @@
 ﻿using BookStore_API.Contracts;
 using BookStore_API.Data;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,12 @@ namespace BookStore_API.Services
     public class AuthorRepository : IAuthorRepository
     {
         private readonly ApplicationDbContext _db;
+        private readonly IWebHostEnvironment _env;
 
-        public AuthorRepository(ApplicationDbContext db)
+        public AuthorRepository(ApplicationDbContext db, IWebHostEnvironment env)
         {
             _db = db;
+            _env = env;
         }
 
         public async Task<bool> Create(Author entity)
@@ -64,7 +67,13 @@ namespace BookStore_API.Services
 
         public async Task<bool> DeleteAllBooks(IEnumerable<Book> entities)
         {
-            entities.ToList().ForEach(i => { _db.Books.Remove(i); });
+            entities.ToList().ForEach(i => {
+                _db.Books.Remove(i);
+                if (System.IO.File.Exists($"{_env.ContentRootPath}\\uploads\\{i.Image}"))
+                {
+                    System.IO.File.Delete($"{_env.ContentRootPath}\\uploads\\{i.Image}");
+                }
+            });
             return await Save();
         }
     }

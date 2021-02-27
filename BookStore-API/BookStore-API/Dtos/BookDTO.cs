@@ -14,6 +14,7 @@ namespace BookStore_API.Dtos
         public string Isbn { get; set; }
         public string Summary { get; set; }
         public string Image { get; set; }
+        public string File { get; set; }
         public decimal? Price { get; set; }
 
         public int? AuthorId { get; set; }
@@ -28,6 +29,7 @@ namespace BookStore_API.Dtos
         public string Isbn { get; set; }
         public string Summary { get; set; }
         public string Image { get; set; }
+        public string File { get; set; }
         public decimal? Price { get; set; }
     }
 
@@ -41,6 +43,7 @@ namespace BookStore_API.Dtos
         [StringLength(500)]
         public string Summary { get; set; }
         public string Image { get; set; }
+        public string File { get; set; }
         public decimal? Price { get; set; }
         [Required]
         public int AuthorId { get; set; }
@@ -57,6 +60,7 @@ namespace BookStore_API.Dtos
         [StringLength(500)]
         public string Summary { get; set; }
         public string Image { get; set; }
+        public string File { get; set; }
         public decimal? Price { get; set; }
         public int? AuthorId { get; set; }
 

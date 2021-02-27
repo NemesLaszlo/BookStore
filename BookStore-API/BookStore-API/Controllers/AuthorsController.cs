@@ -220,15 +220,15 @@ namespace BookStore_API.Controllers
                     return NotFound();
                 }
                 var author = await _authorRepository.FindById(id);
-                var isSuccessDeleteBooks = await _authorRepository.DeleteAllBooks(author.Books);
-                if (!isSuccessDeleteBooks)
-                {
-                    _logger.LogInfo($"{location}: Author with id: {id} has no books to delete");
-                }
                 var isSuccess = await _authorRepository.Delete(author);
                 if (!isSuccess)
                 {
                     return InternalError($"{location}: Author delete failed");
+                }
+                var isSuccessDeleteBooks = await _authorRepository.DeleteAllBooks(author.Books);
+                if (!isSuccessDeleteBooks)
+                {
+                    _logger.LogInfo($"{location}: Author with id: {id} has no books to delete");
                 }
                 _logger.LogWarn($"{location}: Author with id: {id} successfully deleted");
                 return NoContent();

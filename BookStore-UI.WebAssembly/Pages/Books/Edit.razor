@@ -69,7 +69,7 @@ else
             }
             else if (!string.IsNullOrWhiteSpace(Model.Image))
             {
-                <img src="uploads/@Model.Image" style="height:100px;width:100px" />
+                <img src="@string.Format("data:image/png;base64,{0}", Model.File)" style="height:100px;width:100px" />
             }
         </div>
         <button class="btn btn-primary" type="submit">
@@ -125,7 +125,7 @@ else
             isSuccess = await _repo.Update(Endpoints.BooksEndpoint, Model, Model.Id);
             if (isSuccess)
             {
-                _toastService.ShowWarning("Book Updated Successfully", "");
+                _toastService.ShowSuccess("Book Updated Successfully", "");
                 BackToList();
             }
         }
@@ -134,11 +134,10 @@ else
     private async Task HandleFileSelection(IFileListEntry[] files)
     {
         file = files.FirstOrDefault();
-        isFileChanged = true;
         if (file != null)
         {
-            var name = file.Name;
-            if (name.Contains("jpg") || name.Contains("png") || name.Contains("jpeg"))
+            var ext = Path.GetExtension(file.Name);
+            if (ext.Contains("jpg") || ext.Contains("png") || ext.Contains("jpeg"))
             {
                 msFile = new MemoryStream();
                 await file.Data.CopyToAsync(msFile);

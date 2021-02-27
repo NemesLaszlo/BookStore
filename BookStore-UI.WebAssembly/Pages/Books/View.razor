@@ -69,7 +69,7 @@ else
             </table>
         </div>
         <div class="col-4">
-            <img src="uploads/@Model.Image" style="height:300px; width:300px" />
+            <img src="@string.Format("data:image/png;base64,{0}", Model.File)" style="height:300px; width:300px" />
         </div>
     </div>
 }
